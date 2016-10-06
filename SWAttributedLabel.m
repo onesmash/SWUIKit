@@ -7,16 +7,12 @@
 //
 
 #import "SWAttributedLabel.h"
+#import "SWUIKitMacros.h"
 
 #define IOS8            ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 8.0)
 #define IOS9            ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 9.0)
 #define IsLandscape   (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
 #define UIScreenWidth    ((IOS8 || !IsLandscape) ?[UIScreen mainScreen].bounds.size.width:[UIScreen mainScreen].bounds.size.height)
-#define UIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0x00FF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0x0000FF))/255.0 \
-alpha:1.0]
 
 static NSString *const kSWLinkAttributeName = @"kSWLinkAttributeName";
 
