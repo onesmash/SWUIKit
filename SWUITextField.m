@@ -6,14 +6,17 @@
 //  Copyright © 2015年 Netease. All rights reserved.
 //
 
-#import "YXUITextField.h"
+#import "SWUITextField.h"
 
 @interface SWUITextField () {
+    UIColor *_placeHolderColor;
 }
 
 @end
 
-@implementation YXUITextField
+@implementation SWUITextField
+
+@synthesize placeHolderColor = _placeHolderColor;
 
 - (void)setPlaceholder:(NSString *)placeholder
 {

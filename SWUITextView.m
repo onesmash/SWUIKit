@@ -5,7 +5,7 @@
 //  Created by Xuhui on 15/11/30.
 //
 
-#import "YXUITextView.h"
+#import "SWUITextView.h"
 
 @interface SWUITextView () {
     UIColor *_placeHolderColor;
@@ -158,13 +158,13 @@
         } else {
             height = maxHeight;
         }
-        if(self.height > maxHeight || self.height < minHeight) {
+        if(self.bounds.size.height > maxHeight || self.bounds.size.height < minHeight) {
             needUpdateHeight = YES;
-        } else if(!((height >= maxHeight && self.height >= maxHeight) || (height <= minHeight && self.height <= minHeight) || height == self.height)) {
+        } else if(!((height >= maxHeight && self.bounds.size.height >= maxHeight) || (height <= minHeight && self.bounds.size.height <= minHeight) || height == self.bounds.size.height)) {
             needUpdateHeight = YES;
         }
     } else {
-        if(height != self.height) {
+        if(height != self.bounds.size.height) {
             needUpdateHeight = YES;
         }
     }
@@ -172,7 +172,9 @@
         if([self.delegate respondsToSelector:@selector(textView:willChangeHeight:)]) {
             [self.delegate textView:self willChangeHeight:height];
         }
-        self.height = height;
+        CGSize size = self.bounds.size;
+        size.height = height;
+        self.bounds = (CGRect){ .origin=self.bounds.origin, .size = size };
         if([self.delegate respondsToSelector:@selector(textViewHeightDidChange:)]) {
             [self.delegate textViewHeightDidChange:self];
         }
@@ -257,11 +259,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    _placeHolderLabel.width = self.width - self.placeHolderInsetLeft;
-    _placeHolderLabel.height = self.font.pointSize;
-    _placeHolderLabel.left = self.placeHolderInsetLeft;
-    _placeHolderLabel.top = self.textContainerInset.top;
-    
+    CGFloat width = self.bounds.size.width;
+    _placeHolderLabel.frame = (CGRect){.origin = (CGPoint){.x = self.placeHolderInsetLeft, .y = self.textContainerInset.top}, .size = (CGSize){.width = width - self.placeHolderInsetLeft, .height = self.font.pointSize}};
 }
 
 @end

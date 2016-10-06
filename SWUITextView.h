@@ -13,7 +13,7 @@
 
 @optional
 - (void)textView:(SWUITextView *)textView willChangeHeight:(CGFloat)height;
-- (void)textViewHeightDidChange:(YXUITextView *)textView;
+- (void)textViewHeightDidChange:(SWUITextView *)textView;
 - (BOOL)textViewShouldReturn:(SWUITextView *)textView;
 - (void)textViewDidPaste:(SWUITextView *)textView;
 
